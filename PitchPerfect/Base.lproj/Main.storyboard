@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Record Sounds View Controller-->
@@ -35,7 +36,6 @@
                                 <state key="normal" image="stopButton"/>
                                 <connections>
                                     <action selector="stopAudio:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GmE-My-vhh"/>
-                                    <segue destination="S2t-ob-LGr" kind="show" id="E2H-rQ-Fqd"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -55,11 +55,41 @@
                         <outlet property="recordButton" destination="fLe-5P-4rj" id="smR-S4-cF5"/>
                         <outlet property="recordingLabel" destination="xXg-MU-nlU" id="pET-66-br8"/>
                         <outlet property="stopRecordingButton" destination="DsY-c7-NcL" id="6vb-va-Rp2"/>
+                        <segue destination="Fpf-xL-TzT" kind="show" identifier="stopRecording" id="uGa-ig-EHo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="635" y="536"/>
+        </scene>
+        <!--Play Sounds View Controller-->
+        <scene sceneID="U7l-K6-Il2">
+            <objects>
+                <viewController id="Fpf-xL-TzT" customClass="PlaySoundsViewController" customModule="PitchPerfect" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uxc-4m-yyz"/>
+                        <viewControllerLayoutGuide type="bottom" id="i6u-tb-kf6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="acM-al-h0W">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ZUC-5b-wu1">
+                                <rect key="frame" x="20" y="64" width="560" height="536"/>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ZUC-5b-wu1" firstAttribute="leading" secondItem="acM-al-h0W" secondAttribute="leadingMargin" id="PDk-1I-7fI"/>
+                            <constraint firstItem="i6u-tb-kf6" firstAttribute="top" secondItem="ZUC-5b-wu1" secondAttribute="bottom" id="Wog-2m-nip"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ZUC-5b-wu1" secondAttribute="trailing" id="aZy-Z5-5bL"/>
+                            <constraint firstItem="ZUC-5b-wu1" firstAttribute="top" secondItem="uxc-4m-yyz" secondAttribute="bottom" id="hOx-eq-bhY"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LNP-C6-6mF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1302" y="536"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="vey-UB-XBb">
@@ -76,24 +106,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i0L-Lt-4wr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-92" y="536"/>
-        </scene>
-        <!--Record Sounds View Controller-->
-        <scene sceneID="elb-IY-gpG">
-            <objects>
-                <viewController id="S2t-ob-LGr" customClass="RecordSoundsViewController" customModule="PitchPerfect" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ST8-Is-Ai9"/>
-                        <viewControllerLayoutGuide type="bottom" id="toW-do-8IA"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="TXy-2K-ase">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pWl-A4-pY0" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1360" y="536"/>
         </scene>
     </scenes>
     <resources>
