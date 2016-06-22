@@ -28,14 +28,12 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     @IBAction func recordAudio(sender: AnyObject) {
-        print("Button pressed!")
         recordingLabel.text = "Recording in progress!"
         stopRecordingButton.enabled = true
         recordButton.enabled = false
         stopRecordingButton.hidden = false
         
         let dirPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory,.UserDomainMask, true)[0] as String
-        
         let recordingName = "recordedVoice.wav"
         let pathArray = [dirPath, recordingName]
         let filePath = NSURL.fileURLWithPathComponents(pathArray)
@@ -52,7 +50,6 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     @IBAction func stopAudio(sender: AnyObject) {
-        print("Button stop pressed!")
         recordButton.enabled = true
         stopRecordingButton.hidden = false
         stopRecordingButton.enabled = false
@@ -63,12 +60,10 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     override func viewWillAppear(animated: Bool) {
-        print("viewWillAppear called")
         stopRecordingButton.hidden = true
     }
     
     func audioRecorderDidFinishRecording(recorder: AVAudioRecorder, successfully flag: Bool) {
-        print("Finish Recording")
         if(flag){
             self.performSegueWithIdentifier("stopRecording", sender: audioRecorder.url)
         } else {
@@ -80,7 +75,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         if (segue.identifier == "stopRecording"){
             let playSoundsVC = segue.destinationViewController as! PlaySoundsViewController
             let recordedAudioURL = sender as! NSURL
-            playSoundsVC.recordedAudio = recordedAudioURL
+            playSoundsVC.recordedAudioURL = recordedAudioURL
         }
     }
 }
