@@ -10,7 +10,14 @@ import UIKit
 import AVFoundation
 
 class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
-
+    struct Alerts {
+        static let DismissAlert = "Dismiss"
+        static let RecordingProgressMessage = "Recording in progress!"
+        static let RecordingReadyMessage = "Tap to Record"
+        static let AudioRecordedFailedTitle = "Audio Recorded Failed on Saving"
+        static let AudioRecordedFailedMessage = "Something went wrong with when saving recorded file."
+    }
+    
     @IBOutlet weak var recordingLabel: UILabel!
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var stopRecordingButton: UIButton!
@@ -28,7 +35,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     @IBAction func recordAudio(_ sender: AnyObject) {
-        recordingLabel.text = "Recording in progress!"
+        recordingLabel.text = Alerts.RecordingProgressMessage
         stopRecordingButton.isEnabled = true
         recordButton.isEnabled = false
         stopRecordingButton.isHidden = false
@@ -52,7 +59,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         recordButton.isEnabled = true
         stopRecordingButton.isHidden = false
         stopRecordingButton.isEnabled = false
-        recordingLabel.text = "Tap to Record"
+        recordingLabel.text = Alerts.RecordingReadyMessage
         audioRecorder.stop()
         let audioSession = AVAudioSession.sharedInstance()
         try! audioSession.setActive(false)
@@ -66,7 +73,7 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
         if(flag){
             self.performSegue(withIdentifier: "stopRecording", sender: audioRecorder.url)
         } else {
-            print("Saving of recording fail")
+            showAlert(Alerts.AudioRecordedFailedTitle, message: Alerts.AudioRecordedFailedMessage)
         }
     }
     
@@ -76,6 +83,12 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
             let recordedAudioURL = sender as! URL
             playSoundsVC.recordedAudioURL = recordedAudioURL
         }
+    }
+    
+    func showAlert(_ title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: Alerts.DismissAlert, style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
